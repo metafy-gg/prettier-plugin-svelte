@@ -30,7 +30,7 @@ devDependencies:
   rollup: 2.36.0
   rollup-plugin-typescript: 1.0.1_tslib@2.3.0+typescript@4.1.3
   svelte: 3.38.2
-  tailwind-utils: github.com/metafy-gg/tailwind-utils/9f0469b08f89727db532dc2a5214878c0bd05c8a_ts-node@9.1.1
+  tailwind-utils: github.com/metafy-gg/tailwind-utils/7da896e719a3373c67936192b68defdc84951cc6_ts-node@9.1.1
   tailwindcss: 2.2.4_ts-node@9.1.1
   ts-node: 9.1.1_typescript@4.1.3
   tslib: 2.3.0
@@ -2637,9 +2637,9 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  github.com/metafy-gg/tailwind-utils/9f0469b08f89727db532dc2a5214878c0bd05c8a_ts-node@9.1.1:
-    resolution: {commit: 9f0469b08f89727db532dc2a5214878c0bd05c8a, repo: git+ssh://git@github.com/metafy-gg/tailwind-utils.git, type: git}
-    id: github.com/metafy-gg/tailwind-utils/9f0469b08f89727db532dc2a5214878c0bd05c8a
+  github.com/metafy-gg/tailwind-utils/7da896e719a3373c67936192b68defdc84951cc6_ts-node@9.1.1:
+    resolution: {commit: 7da896e719a3373c67936192b68defdc84951cc6, repo: git+ssh://git@github.com/metafy-gg/tailwind-utils.git, type: git}
+    id: github.com/metafy-gg/tailwind-utils/7da896e719a3373c67936192b68defdc84951cc6
     name: tailwind-utils
     version: 1.0.0
     dependencies:

@@ -1,5 +1,9 @@
 import { Doc, doc, FastPath, ParserOptions } from 'prettier';
-import { sortClasses, config as twconfig, orderByClassname } from 'tailwind-utils/lib/index.js';
+import {
+    sortClasses,
+    evalConfig as evalTailwindConfig,
+    orderByClassname,
+} from 'tailwind-utils/lib/index.js';
 import { formattableAttributes, selfClosingTags } from '../lib/elements';
 import { extractAttributes } from '../lib/extractAttributes';
 import { getText } from '../lib/getText';
@@ -398,7 +402,7 @@ export function print(path: FastPath, options: ParserOptions, print: PrintFn): D
                     node.value[0].type === 'Text'
                 ) {
                     if (tailwindCfg == null || byClassname == null) {
-                        tailwindCfg = twconfig.load(options.tailwindConfigPath);
+                        tailwindCfg = evalTailwindConfig(options.tailwindConfigPath);
                         byClassname = orderByClassname(tailwindCfg);
                     }
                     const sorted = sortClasses(node.value[0].data, byClassname);
