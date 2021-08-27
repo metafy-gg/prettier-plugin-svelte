@@ -10,6 +10,7 @@ export interface PluginOptions {
     svelteBracketNewLine: boolean;
     svelteAllowShorthand: boolean;
     svelteIndentScriptAndStyle: boolean;
+    tailwindConfigPath: Array<string>;
 }
 
 function makeChoice(choice: string) {
@@ -86,6 +87,14 @@ export const options: Record<keyof PluginOptions, SupportOption> = {
         default: true,
         description:
             'Whether or not to indent the code inside <script> and <style> tags in Svelte files',
+    },
+    tailwindConfigPath: {
+        since: '2.3.1',
+        category: 'Svelte',
+        type: 'path',
+        default: '',
+        array: false,
+        description: 'Path to your Tailwind config file',
     },
 };
 

@@ -1,2 +1,2 @@
 declare module 'svelte';
-declare module 'tailwind-sort';
+declare module 'tailwind-utils/lib/index.js';

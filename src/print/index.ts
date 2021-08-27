@@ -1,5 +1,5 @@
 import { Doc, doc, FastPath, ParserOptions } from 'prettier';
-import sortTailwindClasses from 'tailwind-sort';
+import { sortClasses, config as twconfig, orderByClassname } from 'tailwind-utils/lib/index.js';
 import { formattableAttributes, selfClosingTags } from '../lib/elements';
 import { extractAttributes } from '../lib/extractAttributes';
 import { getText } from '../lib/getText';
@@ -81,6 +81,10 @@ let svelteOptionsDoc: Doc | undefined;
 function groupConcat(contents: doc.builders.Doc[]): doc.builders.Doc {
     return group(concat(contents));
 }
+
+// Will be loaded inside `print` for the very first node, then reused.
+let tailwindCfg: any = null;
+let byClassname: any = null;
 
 export function print(path: FastPath, options: ParserOptions, print: PrintFn): Doc {
     const n = path.getValue();
@@ -393,7 +397,11 @@ export function print(path: FastPath, options: ParserOptions, print: PrintFn): D
                     node.value.length > 0 &&
                     node.value[0].type === 'Text'
                 ) {
-                    const sorted = sortTailwindClasses(node.value[0].data);
+                    if (tailwindCfg == null || byClassname == null) {
+                        tailwindCfg = twconfig.load(options.tailwindConfigPath);
+                        byClassname = orderByClassname(tailwindCfg);
+                    }
+                    const sorted = sortClasses(node.value[0].data, byClassname);
                     node.value[0].raw = sorted;
                     node.value[0].data = sorted;
                 }
