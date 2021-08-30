@@ -1,4 +1,5 @@
 import { Doc, doc, FastPath, ParserOptions } from 'prettier';
+import sortTailwindClasses from 'tailwind-sort';
 import { formattableAttributes, selfClosingTags } from '../lib/elements';
 import { extractAttributes } from '../lib/extractAttributes';
 import { getText } from '../lib/getText';
@@ -383,6 +384,18 @@ export function print(path: FastPath, options: ParserOptions, print: PrintFn): D
             } else {
                 if (node.value === true) {
                     return concat([line, node.name]);
+                }
+                // Sort Tailwind classes.
+                // TODO: Should try to detect Tailwind classes in any kind of string prop, not just `class`, and if found then sort those as well.
+                // TODO: Must sort strings within inline JS expressions as well (either inside the template or inside the `<script>` tag).
+                if (
+                    node.name === 'class' &&
+                    node.value.length > 0 &&
+                    node.value[0].type === 'Text'
+                ) {
+                    const sorted = sortTailwindClasses(node.value[0].data);
+                    node.value[0].raw = sorted;
+                    node.value[0].data = sorted;
                 }
 
                 const quotes = !isLoneMustacheTag(node.value) || options.svelteStrictMode;

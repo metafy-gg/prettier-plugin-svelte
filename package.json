@@ -45,5 +45,8 @@
     "peerDependencies": {
         "prettier": "^1.16.4 || ^2.0.0",
         "svelte": "^3.2.0"
+    },
+    "dependencies": {
+        "tailwind-sort": "github:metafy-gg/tailwind-sort"
     }
 }
